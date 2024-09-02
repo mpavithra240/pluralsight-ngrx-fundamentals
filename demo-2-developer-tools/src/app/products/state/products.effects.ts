@@ -44,7 +44,7 @@ export class ProdcutEffects {
         concatMap(({product}) =>
             this.productService.update(product).pipe(
                 map(() =>
-                    ProductsApiAction.productsUpdatedSuccess({product:product})
+                    ProductsApiAction.productsUpdatedSuccess({update:{id: product.id, changes: product }})
                 ),
                 catchError((error) => 
                     of(ProductsApiAction.productsUpdatedFail({message:error}))
@@ -53,7 +53,7 @@ export class ProdcutEffects {
         )
     ))
 
-    deleteProducr$ = createEffect(() => this.actions$.pipe(
+    deleteProduct$ = createEffect(() => this.actions$.pipe(
         ofType(ProductsPageActions.deleteProducts),
         mergeMap(({id}) =>
             this.productService.delete(id).pipe(

@@ -18,10 +18,10 @@ export const ProductsApiAction = createActionGroup({
         'Products Loaded Success': props<{products:Product[]}>(),
         'Products Loaded Fail': props<{message: string}>(),
 
-        'Products Added Success': props<{products:Product}>(),
+        'Products Added Success': props<{product:Product}>(),
         'Products Added Fail': props<{message: string}>(),
 
-        'Products Updated Success': props<{products:Product}>(),
+        'Products Updated Success': props<{product:Product}>(),
         'Products Updated Fail': props<{message: string}>(),
         
         'Products Deleted Success': props<{id:number}>(),

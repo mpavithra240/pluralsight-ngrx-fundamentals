@@ -7,6 +7,7 @@ import {
 } from '../state/products.actions';
 import {
   selectProducts,
+  selectProductsErrorMessage,
   selectProductsLoading,
   selectProductsShowProductCode,
   selectProductsTotal,
@@ -22,22 +23,28 @@ export class ProductsPageComponent {
   total$ = this.store.select(selectProductsTotal);
   loading$ = this.store.select(selectProductsLoading);
   showProductCode$ = this.store.select(selectProductsShowProductCode);
-  errorMessage = ''
+  errorMessage$ = this.store.select(selectProductsErrorMessage);
 
   constructor(private productsService: ProductsService, private store: Store) {}
 
   ngOnInit() {
-    this.getProducts();
+    // this.getProducts();
+
+    // after adding ngrx effects
+
+    // removed after adding load products action through ngonitEffects in effects page 
+    // this.store.dispatch(ProductsPageActions.loadProducts());
+
   }
 
-  getProducts() {
-    this.store.dispatch(ProductsPageActions.loadProducts());
-    this.productsService.getAll().subscribe((products) => {
-      this.store.dispatch(
-        ProductsApiAction.productsLoadedSuccess({ products })
-      );
-    });
-  }
+  // getProducts() {
+  //   this.store.dispatch(ProductsPageActions.loadProducts());
+  //   this.productsService.getAll().subscribe((products) => {
+  //     this.store.dispatch(
+  //       ProductsApiAction.productsLoadedSuccess({ products })
+  //     );
+  //   });
+  // }
 
   toggleShowProductCode() {
     this.store.dispatch(ProductsPageActions.toggleShowProductCode());
